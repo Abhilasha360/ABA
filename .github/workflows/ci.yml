@@ -1,23 +1,25 @@
-name: CI
+name: CI/CD Pipeline
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
 
       - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-      
+        run: npm install
+
       - name: Run tests
-        run: pytest
-
-      - name: Build Docker Image
-        run: docker build -t news-api .
-
+        run: npm test
