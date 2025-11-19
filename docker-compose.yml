@@ -1,0 +1,17 @@
+
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - NEWSAPI_KEY=be7f60fa975f4d8bbde4072e62d2ca71
+
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
