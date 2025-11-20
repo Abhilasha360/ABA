@@ -12,6 +12,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Debug directory
+        run: |
+          echo "Current working directory:"
+          pwd
+          echo "Listing all files:"
+          ls -R .
+
       - name: Set up Python 3.10
         uses: actions/setup-python@v5
         with:
@@ -33,9 +40,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          echo "Building Docker image..."
           IMAGE_NAME="${{ secrets.DOCKERHUB_USERNAME }}/aba:latest"
-          docker build -t $IMAGE_NAME .
+          docker build -t $IMAGE_NAME -f Dockerfile .
 
       - name: Push Docker image
         run: |
