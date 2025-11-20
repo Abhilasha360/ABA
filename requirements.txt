@@ -1,5 +1,4 @@
 fastapi
 uvicorn
-aiohttp
-prometheus-client
-pytest
+requests
+pydantic
